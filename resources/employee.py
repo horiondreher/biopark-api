@@ -37,9 +37,13 @@ class EmployeeRegister(Resource):
     
     def post(self):
         data = EmployeeRegister.parser.parse_args()
-        print(data)
+
+        if EmployeeModel.find_employee_username(data['username']):
+            return {"message": "Este nome de usuario já existe"}, 400
+
         employee = EmployeeModel(**data)
         employee.save_employee()
+        
         return {"message": "Usuário criado com sucesso"}, 201
 
 

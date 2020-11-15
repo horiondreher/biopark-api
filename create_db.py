@@ -16,6 +16,7 @@ TABLES['employee'] = (
     "username VARCHAR(32) NOT NULL," # username do funcionário
     "password VARCHAR(32) NOT NULL," # senha (deverá ser encriptada no futuro)
     "PRIMARY KEY (worker_id)" 
+    "UNIQUE KEY (username)" 
     ") ENGINE=MyISAM" # engine escolhida para tabela devido a boa funcionalidade para poucas atualizações (mais simples)
 )
 

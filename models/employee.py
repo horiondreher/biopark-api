@@ -13,7 +13,7 @@ class EmployeeModel():
         self.password = password
 
     def save_employee(self):
-        query = ( "INSERT INTO employee" 
+        query = ("INSERT INTO employee" 
                 "(worker_id, full_name, username, password)"
                 "VALUES (%s, %s, %s, %s)")
         data_employee = (self.worker_id, self.fullname, self.username, self.password)
@@ -29,4 +29,28 @@ class EmployeeModel():
         # fecha cursos e conexão com banco de dados
         cursor.close()
         cnx.close()
-        return 201
+        return {'message': 'Usuário cadastrado com sucesso'}, 201
+    
+    @classmethod
+    def find_employee_username(cls, username):
+        query = ("SELECT * FROM {} WHERE username=%s".format(cls.TABLE_NAME))
+
+        try:
+            cnx = mysql.connector.connect(**db_connect) # cnx armazena o objeto de conexão
+            cursor = cnx.cursor() # cursor é o objeto usado para querys
+            cursor.execute(query, (username,))
+            row = cursor.fetchone()
+            print(row)
+        except mysql.connector.Error as err:
+            print(err)
+            return 400
+
+        if row:
+            user = cls(*row)
+        else:
+            user = None    
+        # fecha cursos e conexão com banco de dados
+        cursor.close()
+        cnx.close()
+
+        return user
