@@ -13,6 +13,5 @@ app.config.update(
 )
 api = Api(app)
 
-
 # abre conexão do servidor na porta selecionada
 app.run(port = 5000)
