@@ -25,8 +25,8 @@ TABLES['employee'] = (
 # a mensagem será armazenada com o conteúdo, remetente, destinatário e horario de envio
 # além disso, deverár conter as informações sobre qual método de envio será utilizado, tais como email ou sms.
 # seu identificador será relacionado com a tabela de usuário, até porque, não pode ficar sem dono
-TABLES['messages'] = (
-    "CREATE TABLE messages ("
+TABLES['msgs'] = (
+    "CREATE TABLE msgs ("
     "dt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP," # horário de criação
     "message_id INT NOT NULL AUTO_INCREMENT," # identificador único
     "message_dt DATETIME NOT NULL," # horário e data para envio

@@ -18,9 +18,9 @@ class EmployeeModel():
     # uma  query é criada e executada pelo MySQL connector utilizando o cursor
     # qualquer erro interno é retornado com o código 500 - INTERNAL SERVER ERROR
     def save_employee(self):
-        query = ("INSERT INTO employee" 
+        query = ("INSERT INTO {}" 
                 "(worker_id, full_name, username, password)"
-                "VALUES (%s, %s, %s, %s)")
+                "VALUES (%s, %s, %s, %s)".format(self.TABLE_NAME))
         data_employee = (self.worker_id, self.fullname, self.username, self.password)
         
         try:
@@ -33,8 +33,6 @@ class EmployeeModel():
         # fecha cursos e conexão com banco de dados
         cursor.close()
         cnx.close()
-        return {'message': 'Usuário cadastrado com sucesso'}
-    
 
     # Métodos criado para facilitar a busca de usuário por nome e ID
     # Caso não encontre, retorna um resultado nulo
