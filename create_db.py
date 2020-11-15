@@ -10,13 +10,13 @@ TABLES = {}
 # conterá informações básicas necessárias para identificar remetente e
 # permitir o envio de mensagem apenas por pessoas cadastradas no sistema
 TABLES['employee'] = (
-    " CREATE TABLE employee ( " 
-    " worker_id INT UNSIGNED NOT NULL, " # cadastro do funcionário que deverá ser único
-    " full_name VARCHAR(64) NOT NULL, " # nome completo do funcionário
-    " username VARCHAR(32) NOT NULL, " # username do funcionário
-    " password VARCHAR(32) NOT NULL, " # senha (deverá ser encriptada no futuro)
-    " PRIMARY KEY (worker_id) " 
-    " ) ENGINE=MyISAM" # engine escolhida para tabela devido a boa funcionalidade para poucas atualizações (mais simples)
+    "CREATE TABLE employee (" 
+    "worker_id INT UNSIGNED NOT NULL," # cadastro do funcionário que deverá ser único
+    "full_name VARCHAR(64) NOT NULL," # nome completo do funcionário
+    "username VARCHAR(32) NOT NULL," # username do funcionário
+    "password VARCHAR(32) NOT NULL," # senha (deverá ser encriptada no futuro)
+    "PRIMARY KEY (worker_id)" 
+    ") ENGINE=MyISAM" # engine escolhida para tabela devido a boa funcionalidade para poucas atualizações (mais simples)
 )
 
 # tabela de mensagens
@@ -25,21 +25,21 @@ TABLES['employee'] = (
 # além disso, deverár conter as informações sobre qual método de envio será utilizado, tais como email ou sms.
 # seu identificador será relacionado com a tabela de usuário, até porque, não pode ficar sem dono
 TABLES['messages'] = (
-    " CREATE TABLE messages ( "
-    " dt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP," # horário de criação
-    " message_id INT UNSIGNED NOT NULL, " # identificador único
-    " message_dt DATETIME NOT NULL, " # horário e data para envio
-    " sender_worker_id INT UNSIGNED NOT NULL, " # id de remetente, relacionado com tabela employee
-    " receiver_worker_id INT UNSIGNED NOT NULL, " # id de destinatário
-    " email VARCHAR(32) DEFAULT NULL, " # email para envio com identificador unico para tabela
-    " phone VARCHAR(32) DEFAULT NULL, " # telefone para envio de sms ou whastapp com identificador unico para tabela
-    " message_app VARCHAR(32) DEFAULT NULL, " # meio de envio que será utilizado
-    " message MEDIUMTEXT DEFAULT NULL, " # conteúdo da mensagem
-    " PRIMARY KEY (message_id), " 
-    " UNIQUE KEY email (email), "
-    " UNIQUE KEY phone (phone), "
-    " FOREIGN KEY (sender_worker_id) REFERENCES employee(worker_id) "
-    " ) ENGINE=MyISAM"
+    "CREATE TABLE messages ("
+    "dt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP" # horário de criação
+    "message_id INT UNSIGNED NOT NULL," # identificador único
+    "message_dt DATETIME NOT NULL," # horário e data para envio
+    "sender_worker_id INT UNSIGNED NOT NULL," # id de remetente, relacionado com tabela employee
+    "receiver_worker_id INT UNSIGNED NOT NULL," # id de destinatário
+    "email VARCHAR(32) DEFAULT NULL," # email para envio com identificador unico para tabela
+    "phone VARCHAR(32) DEFAULT NULL," # telefone para envio de sms ou whastapp com identificador unico para tabela
+    "message_app VARCHAR(32) DEFAULT NULL," # meio de envio que será utilizado
+    "message MEDIUMTEXT DEFAULT NULL," # conteúdo da mensagem
+    "PRIMARY KEY (message_id)," 
+    "UNIQUE KEY email (email),"
+    "UNIQUE KEY phone (phone),"
+    "FOREIGN KEY (sender_worker_id) REFERENCES employee(worker_id)"
+    ") ENGINE=MyISAM"
 )
 
 # utilizando o mysql.connector, passo as informações necessárias para conexão local ao MySQL
