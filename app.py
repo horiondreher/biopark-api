@@ -1,6 +1,8 @@
 from flask import Flask
 from flask_restful import Api
 
+from resources.employee import EmployeeRegister
+
 #configuração da api rest
 app = Flask(__name__)
 
@@ -13,5 +15,8 @@ app.config.update(
 )
 api = Api(app)
 
+api.add_resource(EmployeeRegister, '/register')
 # abre conexão do servidor na porta selecionada
-app.run(port = 5000)
+
+if __name__ == '__main__':
+    app.run(port = 5000)
