@@ -52,19 +52,18 @@ except mysql.connector.Error as err: # tratamento de erros com códigos disponib
         print("Banco de dados não existe")
     else:
         print(err)
-else:
-    cnx.close()
 
 def create_database(cursor):
     try:
         cursor.execute(
-            "CREATE DATABASE {} DEFAULT CHARACTER SET 'utf8'".format(DB_NAME))
+            "CREATE DATABASE {} DEFAULT CHARACTER SET 'UTF8MB4'".format(DB_NAME))
     except mysql.connector.Error as err:
         print("Falha na criação do banco de dados: {}".format(err))
         exit(1)
 
 try:
     cursor.execute("USE {}".format(DB_NAME))
+    print("Utilizando o banco de dados {}".format(DB_NAME))
 except mysql.connector.Error as err:
     print("O Banco de dados {} não existe".format(DB_NAME))
     if err.errno == errorcode.ER_BAD_DB_ERROR:
@@ -74,4 +73,5 @@ except mysql.connector.Error as err:
     else:
         print(err)
         exit(1)
-        
+
+cnx.close()
