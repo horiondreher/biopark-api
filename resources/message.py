@@ -10,7 +10,7 @@ class Message(Resource):
     # parser para validação de dados enviados pelo client
     parser = reqparse.RequestParser()
 
-    # Data e hora de envio, usuário destino e mensagempodem ser deixados em branco.
+    # Data e hora de envio, usuário destino e mensagem não podem ser deixados em branco.
     # O parser disponibilizado pelo flask será responsável por autenticar
     # o documento json enviado na requisição e retornará uma resposta 400 - BAD REQUEST
     # se os parâmetros não forem cumpridos
@@ -22,25 +22,10 @@ class Message(Resource):
     parser.add_argument('message_app', type = str, required = False)
     parser.add_argument('message', type = str, required = True, help = "Este campo não pode ser deixado em branco")
 
-    def get(self):
-        result = MessageModel.find_messages()
 
-        msgs = []
-        for row in result:
-            msgs.append({
-                "dt": row[0].isoformat(),
-                "message_id": row[1],
-                "message_dt": row[2].isoformat(),
-                "sender_worker_id": row[3],
-                "receiver_worker_id": row[4],
-                "email": row[5],
-                "phone": row[6],
-                "message_app": row[7],
-                "message": row[8]
-            })
-
-        return {"msgs": msgs}
-    
+    # Metodo POST para mensagens
+    # Utiliza todas as informações necessarias para armazenar uma mensagem.
+    # Verifica se a mensagem agendada está no futuro e se o remetente e destinario existe
     def post(self):
         data = Message.parser.parse_args()
 
@@ -60,7 +45,34 @@ class Message(Resource):
         return {"message": "Mensagem criada com sucesso"}, 201
         
 class MessageItem(Resource):
-     def delete(self, _id):
+
+    # Metodo GET para mensagens
+    # A partir do ID de usuario e uma query retornada pelo MessageModel,
+    # transforma todas as mensagens agendadas no banco de dados
+    # e retorna como resposta
+    def get(self, _id):
+        result = MessageModel.find_messages(_id)
+
+        msgs = []
+        for row in result:
+            msgs.append({
+                "dt": row[0].isoformat(),
+                "message_id": row[1],
+                "message_dt": row[2].isoformat(),
+                "sender_worker_id": row[3],
+                "receiver_worker_id": row[4],
+                "email": row[5],
+                "phone": row[6],
+                "message_app": row[7],
+                "message": row[8]
+            })
+
+        return {"msgs": msgs}
+    
+    # Metodo DELETE para mensagens
+    # Exclui uma mensagem a partir de seu id passado como
+    # parâmetro na URL /msg/<id>
+    def delete(self, _id):
         MessageModel.delete_message(_id)
-        
+
         return {"message": "Mensagem excluida com sucesso"}
