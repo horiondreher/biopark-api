@@ -22,8 +22,24 @@ class Message(Resource):
     parser.add_argument('message_app', type = str, required = False)
     parser.add_argument('message', type = str, required = True, help = "Este campo não pode ser deixado em branco")
 
-    def get(self, _id):
-        pass
+    def get(self):
+        result = MessageModel.find_messages()
+
+        msgs = []
+        for row in result:
+            msgs.append({
+                "dt": row[0].isoformat(),
+                "message_id": row[1],
+                "message_dt": row[2].isoformat(),
+                "sender_worker_id": row[3],
+                "receiver_worker_id": row[4],
+                "email": row[5],
+                "phone": row[6],
+                "message_app": row[7],
+                "message": row[8]
+            })
+
+        return {"msgs": msgs}
     
     def post(self):
         data = Message.parser.parse_args()

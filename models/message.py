@@ -33,3 +33,21 @@ class MessageModel():
         # fecha cursos e conexão com banco de dados
         cursor.close()
         cnx.close()
+    
+    @classmethod
+    def find_messages(cls):
+        query = ("SELECT * FROM {}".format(cls.TABLE_NAME))
+
+        try:
+            cnx = mysql.connector.connect(**db_connect) # cnx armazena o objeto de conexão
+            cursor = cnx.cursor() # cursor é o objeto usado para querys
+            cursor.execute(query)
+            rows = cursor.fetchall()
+        except mysql.connector.Error as err:
+            print(err)
+        
+        # fecha cursos e conexão com banco de dados
+        cursor.close()
+        cnx.close()
+
+        return rows
