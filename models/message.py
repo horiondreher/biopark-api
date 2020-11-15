@@ -15,7 +15,7 @@ class MessageModel():
         self.phone = phone
         self.message_app = message_app
         self.message = message
-
+    
     def save_message(self):
         query = ("INSERT INTO {}" 
                 "(message_dt, sender_worker_id, receiver_worker_id, email, phone, message_app, message)"

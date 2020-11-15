@@ -20,7 +20,9 @@ class EmployeeRegister(Resource):
     def post(self):
         data = EmployeeRegister.parser.parse_args()
 
-        if EmployeeModel.find_employee_worker_id(data['worker_id']) or EmployeeModel.find_employee_username(data['username']):
+        if EmployeeModel.find_employee_worker_id(data['worker_id']):
+            return {"message": "Este número de ID já existe"}, 400 # retorna 400 - BAD REQUEST se usuário já existe
+        elif EmployeeModel.find_employee_username(data['username']):
             return {"message": "Este nome de usuario já existe"}, 400 # retorna 400 - BAD REQUEST se usuário já existe
 
         employee = EmployeeModel(**data)
