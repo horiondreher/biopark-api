@@ -2,6 +2,7 @@ from flask import Flask
 from flask_restful import Api
 
 from resources.employee import EmployeeRegister
+from resources.message import Message
 
 #configuração da api rest
 app = Flask(__name__)

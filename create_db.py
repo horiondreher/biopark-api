@@ -15,7 +15,7 @@ TABLES['employee'] = (
     "full_name VARCHAR(64) NOT NULL," # nome completo do funcionário
     "username VARCHAR(32) NOT NULL," # username do funcionário
     "password VARCHAR(32) NOT NULL," # senha (deverá ser encriptada no futuro)
-    "PRIMARY KEY (worker_id)" 
+    "PRIMARY KEY (worker_id)," 
     "UNIQUE KEY (username)" 
     ") ENGINE=MyISAM" # engine escolhida para tabela devido a boa funcionalidade para poucas atualizações (mais simples)
 )
@@ -27,8 +27,8 @@ TABLES['employee'] = (
 # seu identificador será relacionado com a tabela de usuário, até porque, não pode ficar sem dono
 TABLES['messages'] = (
     "CREATE TABLE messages ("
-    "dt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP" # horário de criação
-    "message_id INT UNSIGNED NOT NULL," # identificador único
+    "dt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP," # horário de criação
+    "message_id INT NOT NULL AUTO_INCREMENT," # identificador único
     "message_dt DATETIME NOT NULL," # horário e data para envio
     "sender_worker_id INT UNSIGNED NOT NULL," # id de remetente, relacionado com tabela employee
     "receiver_worker_id INT UNSIGNED NOT NULL," # id de destinatário

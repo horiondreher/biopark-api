@@ -29,13 +29,15 @@ class EmployeeModel():
             cursor.execute(query, data_employee)
         except mysql.connector.Error as err:
             print(err)
-            return 400 # Erro de sintaxe é retornado por 400 - BAD REQUEST
         
         # fecha cursos e conexão com banco de dados
         cursor.close()
         cnx.close()
-        return {'message': 'Usuário cadastrado com sucesso'}, 201 # ao criar o usuário retorna 201 - CREATED
+        return {'message': 'Usuário cadastrado com sucesso'}
     
+
+    # Métodos criado para facilitar a busca de usuário por nome e ID
+    # Caso não encontre, retorna um resultado nulo
     @classmethod
     def find_employee_username(cls, username):
         query = ("SELECT * FROM {} WHERE username=%s".format(cls.TABLE_NAME))
@@ -47,7 +49,6 @@ class EmployeeModel():
             row = cursor.fetchone()
         except mysql.connector.Error as err:
             print(err)
-            return 400
 
         if row:
             user = cls(*row)
@@ -70,7 +71,6 @@ class EmployeeModel():
             row = cursor.fetchone()
         except mysql.connector.Error as err:
             print(err)
-            return 400
 
         if row:
             _id = cls(*row)

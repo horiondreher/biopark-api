@@ -35,15 +35,17 @@ class EmployeeRegister(Resource):
         help = "Este campo não pode ser deixado em branco"
     )
     
+    # Método POST de criação de usuário.
+    # Realiza a verificação dos dados com o parse e também verifica se o usuário já existe
     def post(self):
         data = EmployeeRegister.parser.parse_args()
 
         if EmployeeModel.find_employee_worker_id(data['worker_id']) or EmployeeModel.find_employee_username(data['username']):
-            return {"message": "Este nome de usuario já existe"}, 400
+            return {"message": "Este nome de usuario já existe"}, 400 # retorna 400 - BAD REQUEST se usuário já existe
 
         employee = EmployeeModel(**data)
         employee.save_employee()
         
-        return {"message": "Usuário criado com sucesso"}, 201
+        return {"message": "Usuário criado com sucesso"}, 201 # retorna 201 - CREATED para criação 
 
 
