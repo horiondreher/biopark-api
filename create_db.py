@@ -1,6 +1,8 @@
 import mysql.connector
 from mysql.connector import errorcode
 
+from config import db_config #arquivo de configuração
+
 DB_NAME = 'messages'
 TABLES = {}
 
@@ -40,17 +42,9 @@ TABLES['messages'] = (
     " ) ENGINE=MyISAM"
 )
 
-# configurações para o acesso do banco de dados utilizado
-config = {
-    'user': 'root',
-    'password': '123456QwE*',
-    'host': '127.0.0.1',
-    'raise_on_warnings': True
-}
-
 # utilizando o mysql.connector, passo as informações necessárias para conexão local ao MySQL
 try:
-    cnx = mysql.connector.connect(**config) # cnx armazena o objeto de conexão
+    cnx = mysql.connector.connect(**db_config) # cnx armazena o objeto de conexão
     cursor = cnx.cursor() # cursor é o objeto usado para querys
     print("Conexão realizada com sucesso")
 except mysql.connector.Error as err: # tratamento de erros com códigos disponibilizados por "errorcode"
