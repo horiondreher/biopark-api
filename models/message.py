@@ -4,7 +4,7 @@ from mysql.connector import errorcode
 from config import db_connect
 
 class MessageModel():
-    TABLE_NAME = 'messages'
+    TABLE_NAME = 'msgs'
 
     def __init__(self, message_dt, sender_worker_id, receiver_worker_id,
                 email, phone, message_app, message):

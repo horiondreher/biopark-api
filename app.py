@@ -17,6 +17,7 @@ app.config.update(
 api = Api(app)
 
 api.add_resource(EmployeeRegister, '/register')
+api.add_resource(Message, '/msg')
 # abre conexão do servidor na porta selecionada
 
 if __name__ == '__main__':

@@ -10,30 +10,10 @@ class EmployeeRegister(Resource):
     # O parser disponibilizado pelo flask será responsável por autenticar
     # o documento json enviado na requisição e retornará uma resposta 400 - bad request
     # se os parâmetros não forem cumpridos
-    parser.add_argument(
-        'worker_id',
-        type = str,
-        required = True,
-        help = "Este campo não pode ser deixado em branco"
-    )
-    parser.add_argument(
-        'fullname',
-        type = str,
-        required = True,
-        help = "Este campo não pode ser deixado em branco"
-    )
-    parser.add_argument(
-        'username',
-        type = str,
-        required = True,
-        help = "Este campo não pode ser deixado em branco"
-    )
-    parser.add_argument(
-        'password',
-        type = str,
-        required = True,
-        help = "Este campo não pode ser deixado em branco"
-    )
+    parser.add_argument('worker_id', type = int, required = True, help = "ID do funcionário é necessário")
+    parser.add_argument('fullname', type = str, required = True, help = "Nome completo é necessário")
+    parser.add_argument('username', type = str, required = True, help = "Usuário é necessário")
+    parser.add_argument('password', type = str, required = True, help = "Senha é necessária")
     
     # Método POST de criação de usuário.
     # Realiza a verificação dos dados com o parse e também verifica se o usuário já existe
