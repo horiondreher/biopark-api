@@ -51,3 +51,18 @@ class MessageModel():
         cnx.close()
 
         return rows
+    
+    @classmethod
+    def delete_message(cls, message_id):
+        query = ("DELETE FROM {} WHERE message_id = %s".format(cls.TABLE_NAME))
+
+        try:
+            cnx = mysql.connector.connect(**db_connect) # cnx armazena o objeto de conexão
+            cursor = cnx.cursor() # cursor é o objeto usado para querys
+            cursor.execute(query, (message_id,))
+        except mysql.connector.Error as err:
+            print(err)
+        
+        # fecha cursos e conexão com banco de dados
+        cursor.close()
+        cnx.close()

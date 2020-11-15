@@ -2,7 +2,7 @@ from flask import Flask
 from flask_restful import Api
 
 from resources.employee import EmployeeRegister
-from resources.message import Message
+from resources.message import Message, MessageItem
 
 #configuração da api rest
 app = Flask(__name__)
@@ -18,6 +18,7 @@ api = Api(app)
 
 api.add_resource(EmployeeRegister, '/register')
 api.add_resource(Message, '/msg')
+api.add_resource(MessageItem, '/msg/<string:_id>')
 # abre conexão do servidor na porta selecionada
 
 if __name__ == '__main__':

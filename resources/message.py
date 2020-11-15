@@ -58,6 +58,9 @@ class Message(Resource):
         msg.save_message()
 
         return {"message": "Mensagem criada com sucesso"}, 201
-
-    def delete(self, _id):
-        pass
+        
+class MessageItem(Resource):
+     def delete(self, _id):
+        MessageModel.delete_message(_id)
+        
+        return {"message": "Mensagem excluida com sucesso"}
