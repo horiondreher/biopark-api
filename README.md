@@ -7,7 +7,7 @@ MySQL-connector, ferramentas necessárias para atingir o resultado final esperad
 
 ## Instalação
 
-**Para a execução deste projeto foi utilizado um sistema Linux.**
+**Para a execução deste projeto foi utilizado um sistema Linux e todos os testes foram realizados com Postman.**
 
 Para executar o projeto corremente será necessário:
 1. Instalar o banco de dados MySQL
@@ -25,7 +25,7 @@ Para criar o *database* e suas tabelas, configure o arquivo `config.py`, com as 
 
 ## Funcionamento da API
 
-A API foi desenvolvida com a utilização do framwork Flask, 
+A API foi desenvolvida com a utilização do framework Flask, 
 escolhido pela sua abrangente utilização. 
 Seu objetivo é enviar mensagens a partir de um agendamento, 
 utilizando o meio de comunicação escolhido pelo usuário, 
@@ -40,7 +40,7 @@ necessárias para envio.
 
 As tabela employee é formada por:
 
-Coluna        | Type         
+Coluna        | Tipo         
 ------------ | -------------
 worker_id | int unsigned
 full_name | varchar(64)
@@ -49,7 +49,7 @@ password  | varchar(32)
 
 E a tabela msgs é formada por:
 
-| Field              | Type
+| Coluna              | Tipo
 ------------ | -------------
 | dt                 | datetime     
 | message_id         | int          
@@ -67,8 +67,8 @@ A API possui 4 endpoints:
 
 * /register - POST - realiza o registro do usuário
 * /msg - POST -  realiza o cadastro da mensagem
-* /msg/id - GET - realiza a consulta de mensagens por id do usuário
-* /msg/id - DELETE - realiza a remoção de mensagen por id de mensagem
+* /msg/id - GET - realiza a consulta de mensagens por ID do usuário
+* /msg/id - DELETE - realiza a remoção de mensagen por ID de mensagem
 
 Para criar uma mensagem, o sistema precisa ter o cadastro 
 do remetente e destinatário, para isto o cadastro é 
@@ -117,8 +117,8 @@ Uma delas é utilizar autenticação com JWT, para validar usuários e
 permitir que o servidor não precise armazenar a sessão, mas, apenas
 que receba a chave de autenticação.
 
-Outra melhoria é melhorar a dinâmica de mensagens criadas, pois a 
-forma de envio ainda não foi bem desenvolvida.
+Outra é melhorar a dinâmica de mensagens criadas, pois a 
+forma de envio e relações entre tabelas ainda não foram bem desenvolvidas.
 
 Por fim, criar variáveis de ambiente, para melhorar a dinâmica
 de um programa em desenvovimento ou produção, e assim, não utilizar
