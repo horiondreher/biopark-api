@@ -66,7 +66,7 @@ E a tabela msgs é formada por:
 A API possui 4 endpoints:
 
 * /register - POST - realiza o registro do usuário
-* /msg - POST -  realiza o cadastro da mensagem com POST
+* /msg - POST -  realiza o cadastro da mensagem
 * /msg/id - GET - realiza a consulta de mensagens por id do usuário
 * /msg/id - DELETE - realiza a remoção de mensagen por id de mensagem
 
